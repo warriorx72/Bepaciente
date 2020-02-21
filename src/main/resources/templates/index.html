@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Comunidad Bem&eacute;dica | Bem&eacute;dica</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Roboto-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,700">
+    <!-- Bootstrap Select-->
+    <link rel="stylesheet" href="vendor/bootstrap-select/css/bootstrap-select.min.css">
+    <!-- owl carousel-->
+    <link rel="stylesheet" href="vendor/owl.carousel/assets/owl.carousel.css">
+    <link rel="stylesheet" href="vendor/owl.carousel/assets/owl.theme.default.css">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon and apple touch icons-->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/slick/slick.css">
+    <link rel="stylesheet" type="text/css" href="css/slick/slick-theme.css">
+    <link rel="stylesheet" type="text/css" href="css/slidedoc.css">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+<style>
+    .container-calendar {
+        background: #ffffff;
+        padding: 15px;
+        max-width: 475px;
+        margin: 0 auto;
+        overflow: auto;
+    }
+    
+    .button-container-calendar button {
+        cursor: pointer;
+        display: inline-block;
+        zoom: 1;
+        background: #1eb7bd;
+        color: #fff;
+        border: 1px solid #1eb7bd;
+        border-radius: 4px;
+        padding: 5px 10px;
+    }
+    
+    .table-calendar {
+        border-collapse: collapse;
+        width: 100%;
+    }
+    
+    .table-calendar td,
+    .table-calendar th {
+        padding: 5px;
+        border: 1px solid #e2e2e2;
+        text-align: center;
+        vertical-align: top;
+    }
+    
+    .date-picker.selected {
+        font-weight: bold;
+        outline: 1px dashed #00BCD4;
+    }
+    
+    .date-picker.selected span {
+        border-bottom: 2px solid currentColor;
+    }
+    /* sunday */
+    
+    .date-picker:nth-child(1) {
+        color: red;
+    }
+    /* friday */
+    
+    .date-picker:nth-child(6) {
+        color: green;
+    }
+    
+    #monthAndYear {
+        text-align: center;
+        margin-top: 0;
+    }
+    
+    .button-container-calendar {
+        position: relative;
+        margin-bottom: 1em;
+        overflow: hidden;
+        clear: both;
+    }
+    
+    #previous {
+        float: left;
+    }
+    
+    #next {
+        float: right;
+    }
+    
+    .footer-container-calendar {
+        margin-top: 1em;
+        border-top: 1px solid #dadada;
+        padding: 10px 0;
+    }
+    
+    .footer-container-calendar select {
+        cursor: pointer;
+        display: inline-block;
+        zoom: 1;
+        background: #ffffff;
+        color: #585858;
+        border: 1px solid #bfc5c5;
+        border-radius: 3px;
+        padding: 5px 1em;
+    }
+    
+    .card-footer1 {
+        padding: 0.75rem 1.25rem;
+        background-color: #1eb7bd;
+        border-top: 1px solid rgba(0, 0, 0, 0.125);
+    }
+    
+    footer.main-footer1 {
+        padding-bottom: 0;
+        background: #555;
+        color: #fff;
+    }
+    
+    footer.main-footer1 .copyrights {
+        padding: 50px 0;
+        background: #333;
+        color: #ccc;
+        margin-top: 50px;
+    }
+    
+    footer.main-footer1 .copyrights a {
+        color: #4fbfa8;
+    }
+    
+    footer.main-footer1 .copyrights p {
+        color: inherit;
+        font-size: 0.8rem;
+        margin-bottom: 0;
+    }
+</style>
+
+<body>
+    <div id="all">
+        <!-- Top bar-->
+        <div class="top-bar">
+            <div class="container">
+                <div class="row d-flex align-items-center">
+                    <div class="col-md-6 d-md-block d-none">
+                        <p><i class="fa fa-phone"></i> +420 777 555 333</p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="d-flex justify-content-md-end justify-content-between">
+                            <ul class="list-inline contact-info d-block d-md-none">
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-phone"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-envelope"></i></a></li>
+                            </ul>
+                            <div class="login"><a href="#" data-toggle="modal" data-target="#login-modal" class="login-btn"><i class="fa fa-sign-in"></i><span class="d-none d-md-inline-block">Iniciar sesi&oacute;n</span></a>&nbsp;<a href="" data-toggle="modal" data-target="#register-modal" class="signup-btn"><i class="fa fa-user"></i><span class="d-none d-md-inline-block">Registrarse</span></a></div>
+                            <ul class="social-custom list-inline">
+                                <li class="list-inline-item"><a target="_blank" href="https://api.whatsapp.com/send?phone=5215573764839&text=Hola%2c%20BeMedica&source=&data="><i class="fa fa-whatsapp"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Top bar end-->
+        <!-- Login Modal-->
+        <div id="login-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
+            <div role="document" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 id="login-modalLabel" class="modal-title">Iniciar Sesi&oacute;n</h4>
+                        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="customer-orders.html" method="get">
+                            <div class="form-group">
+                                <input id="email_modal" type="text" placeholder="Correo electr&oacute;nico" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input id="password_modal" type="password" placeholder="Contrase&ntilde;a" class="form-control">
+                            </div>
+                            <p class="text-center">
+                                <button class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Iniciar sesi&oacute;n</button>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Login modal end-->
+        <!-- Registro Modal-->
+        <div id="register-modal" tabindex="-1" role="dialog" aria-labelledby="login-modalLabel" aria-hidden="true" class="modal fade">
+            <div role="document" class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 id="login-modalLabel" class="modal-title">Registrarse</h4>
+                        <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="customer-orders.html" method="get">
+                            <div class="form-group">
+                                <input id="email_modal" required type="text" placeholder="Nombre" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input id="email_modal" required type="text" placeholder="Apellido Paterno" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input id="email_modal" required type="text" placeholder="Apellido Materno" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input id="email_modal" required type="text" placeholder="Usuario" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input id="email_modal" required type="email" placeholder="Correo electr&oacute;nico" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input id="password_modal" required type="password" placeholder="Contrase&ntilde;a" class="form-control">
+                            </div>
+                            <p class="text-center">
+                                <button class="btn btn-template-outlined"><i class="fa fa-sign-in"></i> Registrarse</button>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Registro modal end-->
+        <!-- Navbar Start-->
+        <header class="nav-holder make-sticky">
+            <div id="navbar" role="navigation" class="navbar navbar-expand-lg">
+                <div class="container">
+                    <a th:href="@{/}" class="navbar-brand home"><img src="img/logo.png" alt="Universal logo" class="d-none d-md-inline-block"><img src="img/logo-small.png" alt="Universal logo" class="d-inline-block d-md-none" /><span class="sr-only">Universal - go to homepage</span></a>
+                    <button type="button" data-toggle="collapse" data-target="#navigation" class="navbar-toggler btn-template-outlined"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
+                    <div id="navigation" class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav ml-auto">
+                            <li class="nav-item dropdown menu-large"><a href="#">Regresar a la pagina<b class="caret"></b></a></li>
+                            <li class="nav-item dropdown menu-large active"><a th:href="@{/}">Comunidad BeM&eacute;dica<b class="caret"></b></a></li>
+                        </ul>
+                    </div>
+                    <div id="search" class="collapse clearfix">
+                        <form role="search" class="navbar-form">
+                            <div class="input-group">
+                                <input type="text" placeholder="Search" class="form-control"><span class="input-group-btn">
+                    <button type="submit" class="btn btn-template-main"><i class="fa fa-search"></i></button></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Navbar End-->
+        <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row d-flex align-items-center flex-wrap">
+                    <div class="col-md-7">
+                        <h1 class="h2">Comunidad bem&eacute;dica</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb d-flex justify-content-end">
+                            <li class="breadcrumb-item"><a th:href="@{/}">Inicio</a></li>
+                            <li class="breadcrumb-item active">Comunidad bem&eacute;dica</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <section class="regular slider text-center">
+            <div>
+                <div class="articlexd">
+                    <div class="team-member">
+                        <div class="image">
+                           <img src="img/person-3.png" alt="" class="imagedoctor rounded-circle">
+                        </div>
+                        <h3><a href="team-member.html">Princess Leia</a></h3>
+                        <p class="role">Doctor</p>
+                        <br>
+                        <a data-toggle="modal" data-target="#agendarCita" class="btn btn-primary" style="color:#ffffff">Agendar cita</a>
+                        <br>
+                        <br>
+                            <a data-toggle="modal" data-target="#informacion" class="btn btn-danger" style="color:#ffffff"><i class="fa fa-info-circle"></i> Informaci&oacute;n</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="articlexd">
+                    <div class="team-member">
+                        <div class="image">
+                           <img src="img/person-3.png" alt="" class="imagedoctor rounded-circle">
+                        </div>
+                        <h3><a href="team-member.html">Princess Leia</a></h3>
+                        <p class="role">Doctor</p>
+                        <br>
+                        <a data-toggle="modal" data-target="#agendarCita" class="btn btn-primary" style="color:#ffffff">Agendar cita</a>
+                        <br>
+                        <br>
+                            <a data-toggle="modal" data-target="#informacion" class="btn btn-danger" style="color:#ffffff"><i class="fa fa-info-circle"></i> Informaci&oacute;n</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="articlexd">
+                    <div class="team-member">
+                        <div class="image">
+                           <img src="img/person-3.png" alt="" class="imagedoctor rounded-circle">
+                        </div>
+                        <h3><a href="team-member.html">Princess Leia</a></h3>
+                        <p class="role">Doctor</p>
+                        <br>
+                        <a data-toggle="modal" data-target="#agendarCita" class="btn btn-primary" style="color:#ffffff">Agendar cita</a>
+                        <br>
+                        <br>
+                            <a data-toggle="modal" data-target="#informacion" class="btn btn-danger" style="color:#ffffff"><i class="fa fa-info-circle"></i> Informaci&oacute;n</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="articlexd">
+                    <div class="team-member">
+                        <div class="image">
+                           <img src="img/person-3.png" alt="" class="imagedoctor rounded-circle">
+                        </div>
+                        <h3><a href="team-member.html">Princess Leia</a></h3>
+                        <p class="role">Doctor</p>
+                        <br>
+                        <a data-toggle="modal" data-target="#agendarCita" class="btn btn-primary" style="color:#ffffff">Agendar cita</a>
+                        <br>
+                        <br>
+                            <a data-toggle="modal" data-target="#informacion" class="btn btn-danger" style="color:#ffffff"><i class="fa fa-info-circle"></i> Informaci&oacute;n</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="articlexd">
+                    <div class="team-member">
+                        <div class="image">
+                           <img src="img/person-3.png" alt="" class="imagedoctor rounded-circle">
+                        </div>
+                        <h3><a href="team-member.html">Princess Leia</a></h3>
+                        <p class="role">Doctor</p>
+                        <br>
+                        <a data-toggle="modal" data-target="#agendarCita" class="btn btn-primary" style="color:#ffffff">Agendar cita</a>
+                        <br>
+                        <br>
+                            <a data-toggle="modal" data-target="#informacion" class="btn btn-danger" style="color:#ffffff"><i class="fa fa-info-circle"></i> Informaci&oacute;n</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="articlexd">
+                    <div class="team-member">
+                        <div class="image">
+                           <img src="img/person-3.png" alt="" class="imagedoctor rounded-circle">
+                        </div>
+                        <h3><a href="team-member.html">Princess Leia</a></h3>
+                        <p class="role">Doctor</p>
+                        <br>
+                        <a data-toggle="modal" data-target="#agendarCita" class="btn btn-primary" style="color:#ffffff">Agendar cita</a>
+                        <br>
+                        <br>
+                            <a data-toggle="modal" data-target="#informacion" class="btn btn-danger" style="color:#ffffff"><i class="fa fa-info-circle"></i> Informaci&oacute;n</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="articlexd">
+                    <div class="team-member">
+                        <div class="image">
+                           <img src="img/person-3.png" alt="" class="imagedoctor rounded-circle">
+                        </div>
+                        <h3><a href="team-member.html">Princess Leia</a></h3>
+                        <p class="role">Doctor</p>
+                        <br>
+                        <a data-toggle="modal" data-target="#agendarCita" class="btn btn-primary" style="color:#ffffff">Agendar cita</a>
+                        <br>
+                        <br>
+                            <a data-toggle="modal" data-target="#informacion" class="btn btn-danger" style="color:#ffffff"><i class="fa fa-info-circle"></i> Informaci&oacute;n</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="articlexd">
+                    <div class="team-member">
+                        <div class="image">
+                           <img src="img/person-3.png" alt="" class="imagedoctor rounded-circle">
+                        </div>
+                        <h3><a href="team-member.html">Princess Leia</a></h3>
+                        <p class="role">Doctor</p>
+                        <br>
+                        <a data-toggle="modal" data-target="#agendarCita" class="btn btn-primary" style="color:#ffffff">Agendar cita</a>
+                        <br>
+                        <br>
+                            <a data-toggle="modal" data-target="#informacion" class="btn btn-danger" style="color:#ffffff"><i class="fa fa-info-circle"></i> Informaci&oacute;n</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="articlexd">
+                    <div class="team-member">
+                        <div class="image">
+                           <img src="img/person-3.png" alt="" class="imagedoctor rounded-circle">
+                        </div>
+                        <h3><a href="team-member.html">Princess Leia</a></h3>
+                        <p class="role">Doctor</p>
+                        <br>
+                        <a data-toggle="modal" data-target="#agendarCita" class="btn btn-primary" style="color:#ffffff">Agendar cita</a>
+                        <br>
+                        <br>
+                            <a data-toggle="modal" data-target="#informacion" class="btn btn-danger" style="color:#ffffff"><i class="fa fa-info-circle"></i> Informaci&oacute;n</a>
+                    </div>
+                </div>
+            </div>
+            
+        </section>
+        <!-- Modal -->
+        <div class="modal fade" id="agendarCita" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="exampleModalLongTitle">Calendario</h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Input addon -->
+                        <div class="card card-info">
+                            <div class="card-body">
+                                <h3 id="monthAndYear"></h3>
+
+                                <div class="button-container-calendar">
+                                    <button id="previous" onclick="previous()">
+                                        <i class="fa fa-arrow-left"></i>
+                                    </button>
+                                    <button id="next" onclick="next()">
+                                        <i class="fa fa-arrow-right"></i>
+                                    </button>
+                                </div>
+
+                                <table class="table-calendar" id="calendar" data-lang="en">
+                                    <thead id="thead-month"></thead>
+                                    <tbody id="calendar-body"></tbody>
+                                </table>
+
+                                <div class="footer-container-calendar">
+                                    <label for="month">Fecha: </label>
+                                    <select id="month" onchange="jump()">
+                                        <option value=0>Enero</option>
+                                        <option value=1>Febrero</option>
+                                        <option value=2>Marzo</option>
+                                        <option value=3>Abril</option>
+                                        <option value=4>Mayo</option>
+                                        <option value=5>Junio</option>
+                                        <option value=6>Julio</option>
+                                        <option value=7>Agosto</option>
+                                        <option value=8>Septiembre</option>
+                                        <option value=9>Octubre</option>
+                                        <option value=10>Noviembre</option>
+                                        <option value=11>Diciembre</option>
+                                    </select>
+                                    <select id="year" onchange="jump()"></select>
+                                </div>
+                            </div>
+                            <div class="card-footer1">
+                                <a th:href="@{/citas}" class="btn bg-gradient-info" style="color: #fff;">Ver mis citas</a> <a th:href="@{/agendar_cita}" class="btn bg-gradient-info float-right" style="color: #fff;">Agendar
+											cita</a>
+                            </div>
+                            <div class="modal fade" id="datos">
+                                <div class="modal-dialog modal-xl">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Citas</h4>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="card-body table-responsive p-0" style="height: 300px;">
+                                                <table class="table table-head-fixed" id="tabladatos">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width: 25%;">Nombre Completo</th>
+                                                            <th style="width: 10%;">Fecha</th>
+                                                            <th style="width: 10%;">Hora</th>
+                                                            <th style="width: 20%;">Correo</th>
+                                                            <th style="width: 35%;">Motivo</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr th:each="calendario: ${calendario}">
+                                                            <td th:text="${calendario.nombre} + ' ' + ${calendario.apellidopa} +' '+ ${calendario.apellidoma}"></td>
+                                                            <td th:text="${calendario.fecha_cita}"></td>
+                                                            <td th:text="${calendario.hora_cita}"></td>
+                                                            <td th:text="${calendario.correo}"></td>
+                                                            <td th:text="${calendario.motivo}"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer justify-content-between">
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-info">Ver m&aacute;s citas</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal -->
+		<div class="modal fade" id="informacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLongTitle">Doctor(a): AQUI VA EL NOMBRE</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Especialidad</th>
+      <th scope="col">Direcci&oacute;n</th>
+      <th scope="col">Tel&eacute;fono</th>
+      <th scope="col">Primera consulta</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row" style="color:#1eb7bd">Doctor en patas</th>
+      <td>Av 2 Pte 909, Centro, 72000 Puebla, Pue.</td>
+      <td>222 212 1232</td>
+      <td>$300.00</td>
+    </tr>
+  </tbody>
+</table>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+        <!-- FOOTER -->
+        <footer class="main-footer1">
+            <div class="copyrights">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 text-center-md">
+                            <p>D.R. &copy; Copyright 2020. BeM&eacute;dica. S.A. de C.V.</p>
+                        </div>
+                        <div class="col-lg-8 text-right text-center-md">
+                            <p>Template design by <a href="https://bootstrapious.com/p/big-bootstrap-tutorial">Bootstrapious </a>& <a href="https://fity.cz/ostrava">Fity</a></p>
+                            <!-- Please do not remove the backlink to us unless you purchase the Attribution-free License at https://bootstrapious.com/donate. Thank you. -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- Javascript files-->
+
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <script src="css/slick/slick.js" type="text/javascript" charset="utf-8"></script>
+    <script src="vendor/popper.js/umd/popper.min.js">
+    </script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/jquery.cookie/jquery.cookie.js">
+    </script>
+    <script src="vendor/waypoints/lib/jquery.waypoints.min.js">
+    </script>
+    <script src="vendor/jquery.counterup/jquery.counterup.min.js">
+    </script>
+    <script src="vendor/owl.carousel/owl.carousel.min.js"></script>
+    <script src="vendor/owl.carousel2.thumbs/owl.carousel2.thumbs.min.js"></script>
+    <script src="js/jquery.parallax-1.1.3.js"></script>
+    <script src="vendor/bootstrap-select/js/bootstrap-select.min.js"></script>
+    <script src="vendor/jquery.scrollto/jquery.scrollTo.min.js"></script>
+    <script src="js/front.js"></script>
+    <script src="js/slidedoc.js" type="text/javascript"></script>
+    <script>
+        function generate_year_range(start, end) {
+            var years = "";
+            for (var year = start; year <= end; year++) {
+                years += "<option value='" + year + "'>" + year + "</option>";
+            }
+            return years;
+        }
+
+        today = new Date();
+        currentMonth = today.getMonth();
+        currentYear = today.getFullYear();
+        selectYear = document.getElementById("year");
+        selectMonth = document.getElementById("month");
+
+        createYear = generate_year_range(1970, 2050);
+        /** or
+         * createYear = generate_year_range( 1970, currentYear );
+         */
+
+        document.getElementById("year").innerHTML = createYear;
+
+        var calendar = document.getElementById("calendar");
+        var lang = calendar.getAttribute('data-lang');
+
+        var months = "";
+        var days = "";
+
+        var monthDefault = ["Enero", "Febrero", "Marzo", "Abril", "Mayo",
+            "Junio", "Julio", "Agosto", "Septiembre", "Octubre",
+            "Noviembre", "Diciembre"
+        ];
+
+        var dayDefault = ["Dom", "Lun", "Mart", "Mier", "Juev", "Vier", "Sab"];
+
+        if (lang == "en") {
+            months = monthDefault;
+            days = dayDefault;
+        } else if (lang == "id") {
+            months = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November",
+                "Desember"
+            ];
+            days = ["Ming", "Sen", "Sel", "Rab", "Kam", "Jum", "Sab"];
+        } else if (lang == "fr") {
+            months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+                "Juillet", "Août", "Septembre", "Octobre", "Novembre",
+                "Décembre"
+            ];
+            days = ["dimanche", "lundi", "mardi", "mercredi", "jeudi",
+                "vendredi", "samedi"
+            ];
+        } else {
+            months = monthDefault;
+            days = dayDefault;
+        }
+
+        var $dataHead = "<tr>";
+        for (dhead in days) {
+            $dataHead += "<th data-days='" + days[dhead] + "'>" + days[dhead] + "</th>";
+        }
+        $dataHead += "</tr>";
+
+        //alert($dataHead);
+        document.getElementById("thead-month").innerHTML = $dataHead;
+
+        monthAndYear = document.getElementById("monthAndYear");
+        showCalendar(currentMonth, currentYear);
+
+        function next() {
+            currentYear = (currentMonth === 11) ? currentYear + 1 : currentYear;
+            currentMonth = (currentMonth + 1) % 12;
+            showCalendar(currentMonth, currentYear);
+        }
+
+        function previous() {
+            currentYear = (currentMonth === 0) ? currentYear - 1 : currentYear;
+            currentMonth = (currentMonth === 0) ? 11 : currentMonth - 1;
+            showCalendar(currentMonth, currentYear);
+        }
+
+        function jump() {
+            currentYear = parseInt(selectYear.value);
+            currentMonth = parseInt(selectMonth.value);
+            showCalendar(currentMonth, currentYear);
+        }
+
+        function showCalendar(month, year) {
+
+            var firstDay = (new Date(year, month)).getDay();
+
+            tbl = document.getElementById("calendar-body");
+
+            tbl.innerHTML = "";
+
+            monthAndYear.innerHTML = months[month] + " " + year;
+            selectYear.value = year;
+            selectMonth.value = month;
+
+            // creating all cells
+
+            var date = 1;
+            for (var i = 0; i < 6; i++) {
+
+                var row = document.createElement("tr");
+
+                for (var j = 0; j < 7; j++) {
+                    if (i === 0 && j < firstDay) {
+                        cell = document.createElement("td");
+                        cellText = document.createTextNode("");
+                        cell.appendChild(cellText);
+                        row.appendChild(cell);
+                    } else if (date > daysInMonth(month, year)) {
+                        break;
+                    } else {
+                        cell = document.createElement("td");
+                        cell.setAttribute("data-date", date);
+                        cell.setAttribute("data-month", month + 1);
+                        cell.setAttribute("data-year", year);
+                        cell.setAttribute("data-month_name", months[month]);
+                        cell.className = "date-picker";
+
+                        cell.innerHTML = "<a data-toggle='modal' data-target='#datos' style='color:#000;'> <span>" + date + "</span></a>";
+
+                        if (date === today.getDate() && year === today.getFullYear() && month === today.getMonth()) {
+                            cell.className = "date-picker selected";
+                        }
+                        row.appendChild(cell);
+                        date++;
+                    }
+
+                }
+
+                tbl.appendChild(row);
+            }
+
+        }
+
+        function daysInMonth(iMonth, iYear) {
+            return 32 - new Date(iYear, iMonth, 32).getDate();
+        }
+    </script>
+</body>
+
+</html>
