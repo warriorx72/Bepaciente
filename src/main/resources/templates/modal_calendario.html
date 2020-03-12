@@ -1,0 +1,140 @@
+<div class="modal fade" id="VerAgendarCita" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+		<div class="modal-content">
+			
+			<!-- Cuerpo del Modal -->
+			<div class="modal-body">
+				<div id="elrow" class="row" style="margin: 1% !important;">
+					<div class="col-md-3" style="display:none">
+						<div class="sticky-top mb-3">
+							<!-- Carta 1 -->
+							<div class="card">
+								<div class="card-header">
+									<h4 class="card-title">Draggable Events</h4>
+								</div>
+								<div class="card-body">
+									<div id="external-events">
+										<div class="external-event bg-success">Lunch</div>
+										<div class="external-event bg-warning">Go home</div>
+										<div class="external-event bg-info">Do homework</div>
+										<div class="external-event bg-primary">Work on UI design</div>
+										<div class="external-event bg-danger">Sleep tight</div>
+										<div class="checkbox">
+											<label for="drop-remove">
+												<input type="checkbox" id="drop-remove">
+												remove after drop
+											</label>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Carta 1 -->
+							
+							<!-- Carta 2 -->
+							<div class="card">
+								<div class="card-header">
+									<h3 class="card-title">Create Event</h3>
+								</div>
+								<div class="card-body">
+									<div class="btn-group" style="width: 100%; margin-bottom: 10px;">
+										<ul class="fc-color-picker" id="color-chooser">
+											<li><a class="text-primary" href="#"><i class="fas fa-square"></i></a></li>
+											<li><a class="text-warning" href="#"><i class="fas fa-square"></i></a></li>
+											<li><a class="text-success" href="#"><i class="fas fa-square"></i></a></li>
+											<li><a class="text-danger" href="#"><i class="fas fa-square"></i></a></li>
+											<li><a class="text-muted" href="#"><i class="fas fa-square"></i></a></li>
+										</ul>
+									</div>
+									<div class="input-group">
+										<input id="new-event" type="text" class="form-control" placeholder="Event Title">
+										<div class="input-group-append">
+											<button id="add-new-event" type="button" class="btn btn-primary">Add</button>
+										</div>
+ 									</div>
+								</div>
+							</div>	
+							<!-- Carta -->
+						</div>
+					</div>
+										
+					<div id="ContenedorNuevo">
+								<!-- Esto es el Calendario -->
+								<div id="calendar">
+								</div>
+								<!-- Esto es el Calendario -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+        
+        
+        
+<!-- Siguiente Modal -->
+
+    <div class="modal fade" id="agendarCita">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header bg-info">
+              <h4 class="modal-title">Agendar cita</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form role="form" id="event-form">
+                  <div class="form-group" style="display: none">
+                    <label for="nombre">Nombre completo:</label>
+                    <input type="text" class="form-control" id="newtitle" placeholder="Jose Martinez Lopez">
+                  </div>
+                  <div class="form-group" style="display: none">
+                    <label for="descripcion">Descripci&oacute;n:</label>
+                    <input type="text" class="form-control" id="description" placeholder="Especificar...">
+                  </div>
+                  <div class="form-group" style="display: none">
+                    <label for="feini">Fecha inicial:</label>
+                    <input type="datetime-local" class="form-control" id="startdateandtime">
+                  </div>
+                  <div class="form-group" style="display: none">
+                    <label for="fefi">Fecha final:</label>
+                    <input type="datetime-local" class="form-control" id="enddateandtime">
+                  </div>
+                  <input type="hidden" id="color" value="#00F3FF">
+                  <input type="hidden" name="uid" id="uid"/>
+              </form>
+             <div class="row">
+    			<div class="col">
+      				Nombre:&nbsp;<p id="ContenedorNombreMedico"><b id="NombreMedico"></b></p>
+    			</div>
+    			<div class="col">
+      				C&eacute;dula:&nbsp;<p id="ContenedorCedulaMedico"><b id="CedulaMedico"></b></p>
+    			</div>
+  			</div>
+  			<div class="row">
+    			<div class="col">
+    				Especialidad:&nbsp;<p id="ContenedorEspecialidadMedico"><b id="EspecialidadMedico"></b></p>
+    			</div>
+  			</div>
+             <div class="row">
+    			<div class="col">
+      				Direcci&oacute;n Consultorio:&nbsp;<p id="ContenedorDireccionMedico"><b id="DireccionMedico"></b></p>
+    			</div>
+  			</div>
+             <div class="row">
+    			<div class="col">
+      				Costo:&nbsp;<p id="ContenedorCostoMedico"><b id="CostoMedico"></b></p>
+    			</div>
+  			</div>
+            </div>
+            <div class="modal-footer" id="button-modal"> 
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-info" id="submit-modal">Agendar</button>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+
+<!-- Siguiente Modal -->
